@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node src/index.js",
+    "build": "echo 'Build completed'",
     "dev": "nodemon src/index.js",
     "test": "bash scripts/test-claude-cli.sh",
     "test:recovery": "bash scripts/test-recovery.sh",
