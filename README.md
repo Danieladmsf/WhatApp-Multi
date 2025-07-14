@@ -7,10 +7,12 @@
 - 🔗 **Integração WhatsApp**: Conecta diretamente ao WhatsApp Web
 - 🤖 **Claude CLI**: Usa Claude Code CLI para respostas inteligentes
 - 🔥 **Firebase**: Armazenamento de mensagens e sessões
+- 🔄 **Keep-Alive**: Sistema que mantém ambiente ativo 24/7
 - 🛡️ **Rate Limiting**: Controle de taxa de requisições
 - 📊 **Monitoramento**: Logs detalhados e métricas
-- 🔄 **Auto-restart**: Reinício automático em falhas
+- ⚡ **Auto-restart**: Reinício automático em falhas
 - 🛠️ **Scripts**: Automação completa de deploy e manutenção
+- 🎯 **Comando Único**: Um comando inicia todo o sistema
 
 ## 🚀 Instalação Rápida
 
@@ -27,13 +29,17 @@ bash scripts/deployment/install.sh
 npm run verify-claude
 ```
 
-### 3. Teste e Execute
+### 3. Iniciar Todo o Sistema
 ```bash
-# Verificar Claude CLI
-npm run verify-claude
+# 🎯 COMANDO ÚNICO - Inicia tudo automaticamente:
+bash scripts/deployment/start-service.sh
 
-# Iniciar aplicação
-npm start
+# Isso inicia:
+# ✅ WhatsApp Bridge (com recuperação automática de sessões)
+# ✅ Keep-Alive (mantém ambiente ativo 24/7)
+# ✅ Firebase (conectado automaticamente)
+# ✅ Health Check (endpoint disponível)
+# ✅ Logs estruturados
 ```
 
 ## 📋 Pré-requisitos
@@ -75,20 +81,26 @@ CLAUDE_CLI_WINDOW_MS=60000
 
 ### Comandos Básicos
 ```bash
-# Desenvolvimento
-npm run dev
+# 🚀 Iniciar todo o sistema (WhatsApp + Keep-Alive)
+bash scripts/deployment/start-service.sh
 
-# Produção
-npm start
+# 📊 Ver status de todos os serviços
+pm2 status
 
-# Verificar Claude CLI
-npm run verify-claude
+# 📝 Ver logs
+pm2 logs                    # Todos os logs
+pm2 logs whatsapp-bridge    # Logs do WhatsApp
+pm2 logs keep-alive         # Logs do Keep-Alive
 
-# Ver status dos serviços
-npm run check-services
+# 🔄 Controlar serviços
+pm2 restart all             # Reiniciar tudo
+pm2 stop all                # Parar tudo
+pm2 restart whatsapp-bridge # Reiniciar só WhatsApp
 
-# Limpeza
-npm run cleanup
+# 🛠️ Utilitários
+npm run verify-claude       # Verificar Claude CLI
+npm run check-services      # Status dos serviços
+npm run cleanup             # Limpeza
 ```
 
 ### Scripts de Gerenciamento
@@ -125,25 +137,38 @@ bash scripts/deployment/setup-autostart.sh
 - **Authentication**: Regras de segurança
 - **Real-time**: Sincronização em tempo real
 
+### 🔄 Keep-Alive System
+- **Auto-Ping**: Requisições HTTP a cada 3 minutos
+- **CPU Activity**: Simulação de atividade de processamento
+- **Memory Activity**: Uso simulado de memória
+- **File System**: Atividade de escrita/leitura de arquivos
+- **User Simulation**: Headers realistas de navegadores
+- **24/7 Active**: Mantém ambiente sempre ativo
+
 ## 📊 Monitoramento
 
 ### Logs
 ```bash
-# Ver logs da aplicação
-tail -f logs/app.log
+# Ver todos os logs em tempo real
+pm2 logs
 
-# Ver logs de erro
-tail -f logs/error.log
+# Ver logs específicos
+pm2 logs whatsapp-bridge    # WhatsApp Bridge
+pm2 logs keep-alive         # Keep-Alive System
 
-# Ver logs em tempo real
-bash scripts/service/logs-viewer.sh -f
+# Ver logs de arquivos
+tail -f logs/app.log        # Logs da aplicação
+tail -f logs/error.log      # Logs de erro
+tail -f logs/keep-alive-out.log  # Logs do Keep-Alive
 ```
 
 ### Health Checks
-- Verificação automática do Claude CLI
-- Monitoramento de rate limits
-- Status do Firebase
-- Métricas de performance
+- **Health Endpoint**: `/health` disponível via HTTP
+- **PM2 Monitoring**: Status automático dos processos
+- **Keep-Alive Status**: Monitoramento de atividade
+- **Firebase Status**: Conexão e operações
+- **Claude CLI**: Verificação automática
+- **Rate Limits**: Monitoramento de limites
 
 ## 🛠️ Estrutura do Projeto
 
@@ -171,7 +196,8 @@ whatsapp-bridge/
 │
 ├── 📁 scripts/                     # Scripts auxiliares
 │   ├── deployment/                 # Scripts de deploy
-│   └── service/                    # Scripts de serviço
+│   ├── service/                    # Scripts de serviço
+│   └── keep-alive.js               # Sistema Keep-Alive
 │
 ├── 📁 docs/                        # Documentação
 │   ├── CLAUDE_CODE_CLI_INTEGRATION.md
@@ -288,8 +314,10 @@ sudo systemctl start whatsapp-bridge
 ### Métricas Típicas
 - **Tempo de resposta**: 2-5 segundos
 - **Rate limit**: 10 req/min (configurável)
-- **Memory usage**: ~100-200MB
+- **Memory usage**: ~150-250MB (com Keep-Alive)
 - **CPU usage**: Baixo (<5%)
+- **Keep-Alive**: Ping a cada 3 minutos
+- **Uptime**: 24/7 com sistema ativo
 
 ## 🤝 Contribuição
 
