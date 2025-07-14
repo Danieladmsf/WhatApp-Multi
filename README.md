@@ -1,4 +1,4 @@
-npm# 📱 WhatsApp Bridge - Multi-AI Integration
+# 📱 WhatsApp Bridge - Multi-AI Integration
 
 🤖 **Bridge inteligente entre WhatsApp e Claude AI usando Claude CLI**
 
@@ -175,7 +175,10 @@ whatsapp-bridge/
 │
 ├── 📁 docs/                        # Documentação
 │   ├── CLAUDE_CODE_CLI_INTEGRATION.md
-│   └── PROJECT-STRUCTURE.md
+│   ├── PROJECT-STRUCTURE.md
+│   ├── ARCHITECTURE.md             # Arquitetura do sistema
+│   ├── CHANGELOG.md                # Histórico de mudanças
+│   └── DEPLOY.md                   # Guia de deploy
 │
 ├── 📁 bin/                         # Executáveis
 ├── 📁 logs/                        # Logs da aplicação
@@ -247,7 +250,10 @@ bash scripts/service/service-control.sh status
 ## 📚 Documentação
 
 - **[Claude CLI Integration](docs/CLAUDE_CODE_CLI_INTEGRATION.md)** - Guia completo do Claude CLI
-- **[Project Structure](readme/PROJECT-STRUCTURE.md)** - Estrutura detalhada do projeto
+- **[Project Structure](docs/PROJECT-STRUCTURE.md)** - Estrutura detalhada do projeto
+- **[Deploy Guide](docs/DEPLOY.md)** - Guia completo de deploy
+- **[Architecture](docs/ARCHITECTURE.md)** - Arquitetura do sistema
+- **[Changelog](docs/CHANGELOG.md)** - Histórico de mudanças
 
 ## 🔄 Deploy em Produção
 

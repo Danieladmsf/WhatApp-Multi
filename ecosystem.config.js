@@ -50,6 +50,42 @@ module.exports = {
       
       // Additional PM2 settings
       node_args: '--max-old-space-size=1024'
+    },
+    {
+      name: 'keep-alive',
+      script: 'scripts/keep-alive.js',
+      cwd: '/workspaces/WhatApp-Multi',
+      instances: 1,
+      exec_mode: 'fork',
+      
+      // Environment
+      env: {
+        NODE_ENV: 'development',
+        LOG_LEVEL: 'info'
+      },
+      env_production: {
+        NODE_ENV: 'production',
+        LOG_LEVEL: 'warn'
+      },
+      
+      // Restart policy
+      restart_delay: 10000,
+      max_restarts: 5,
+      min_uptime: '30s',
+      
+      // Logs
+      log_file: './logs/keep-alive-combined.log',
+      out_file: './logs/keep-alive-out.log',
+      error_file: './logs/keep-alive-error.log',
+      log_date_format: 'YYYY-MM-DD HH:mm:ss Z',
+      merge_logs: true,
+      
+      // Monitoring
+      watch: false,
+      max_memory_restart: '100M',
+      
+      // Graceful shutdown
+      kill_timeout: 3000
     }
   ],
   

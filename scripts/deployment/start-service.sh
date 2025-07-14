@@ -14,10 +14,12 @@ if ! command -v pm2 &> /dev/null; then
     fi
 fi
 
-# Stop existing service if running
-echo "🛑 Stopping existing service..."
+# Stop existing services if running
+echo "🛑 Stopping existing services..."
 pm2 stop whatsapp-bridge 2>/dev/null || true
+pm2 stop keep-alive 2>/dev/null || true
 pm2 delete whatsapp-bridge 2>/dev/null || true
+pm2 delete keep-alive 2>/dev/null || true
 
 # Start with ecosystem config if it exists
 if [ -f "ecosystem.config.js" ]; then
@@ -29,26 +31,32 @@ else
 fi
 
 if [ $? -eq 0 ]; then
-    echo "✅ Service started successfully!"
+    echo "✅ Services started successfully!"
     
     # Save PM2 configuration
     pm2 save
     
     # Show status
     echo ""
-    echo "📊 Service Status:"
+    echo "📊 Services Status:"
     pm2 status
     
     echo ""
     echo "📝 To view logs:"
-    echo "pm2 logs whatsapp-bridge"
+    echo "pm2 logs whatsapp-bridge    # WhatsApp Bridge logs"
+    echo "pm2 logs keep-alive         # Keep-Alive logs"
+    echo "pm2 logs                    # All logs"
     echo ""
     echo "🔄 To restart:"
-    echo "pm2 restart whatsapp-bridge"
+    echo "pm2 restart all             # Restart all services"
+    echo "pm2 restart whatsapp-bridge # Restart only WhatsApp"
     echo ""
     echo "🛑 To stop:"
-    echo "pm2 stop whatsapp-bridge"
+    echo "pm2 stop all                # Stop all services"
+    echo "pm2 stop whatsapp-bridge    # Stop only WhatsApp"
+    echo ""
+    echo "🔄 Keep-Alive: Active! Codespace will stay alive 24/7"
 else
-    echo "❌ Failed to start service"
+    echo "❌ Failed to start services"
     exit 1
 fi
