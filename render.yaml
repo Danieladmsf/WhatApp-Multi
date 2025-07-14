@@ -4,11 +4,11 @@ services:
     env: node
     repo: https://github.com/Danieladmsf/WhatApp-Multi
     branch: main
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: npm start
     plan: free
     autoDeploy: true
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
