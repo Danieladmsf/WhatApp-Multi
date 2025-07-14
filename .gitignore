@@ -1,0 +1,49 @@
+# Configurações sensíveis
+config/firebase/firebase-service-account.json
+.env
+.env.local
+.env.production
+
+# Logs
+logs/*.log
+*.log
+
+# Dependências
+node_modules/
+
+# Dados temporários
+.wwebjs_auth/
+temp/
+.tmp/
+
+# Cache
+.cache/
+.npm/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# PM2
+.pm2/
+
+# Process IDs
+.pid
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build
+dist/
+build/
+
+# Runtime
+*.tgz
+*.tar.gz

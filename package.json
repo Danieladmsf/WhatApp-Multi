@@ -1,0 +1,40 @@
+{
+  "name": "whatsapp-bridge",
+  "version": "1.0.0",
+  "description": "WhatsApp Bridge for Multi-AI Integration",
+  "main": "src/index.js",
+  "bin": {
+    "whatsapp-bridge": "./bin/whatsapp-bridge.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "bash scripts/test-claude-cli.sh",
+    "test:recovery": "bash scripts/test-recovery.sh",
+    "cleanup": "node src/scripts/cleanup.js",
+    "verify-claude": "bash scripts/verify-claude-cli.sh",
+    "check-services": "bash scripts/service/service-control.sh status",
+    "check-firebase": "node scripts/check-firebase-sessions.js",
+    "logs": "bash scripts/view-logs.sh",
+    "logs:follow": "bash scripts/view-logs.sh -f"
+  },
+  "keywords": [
+    "whatsapp",
+    "bridge",
+    "ai",
+    "claude",
+    "firebase"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "firebase-admin": "^11.11.0",
+    "qrcode": "^1.5.4",
+    "whatsapp-web.js": "^1.19.5",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

@@ -1,0 +1,52 @@
+[Unit]
+Description=WhatsApp Bridge Multi-AI Service
+Documentation=https://github.com/yourusername/whatsapp-bridge
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+
+# Working directory
+WorkingDirectory=/opt/whatsapp-bridge
+
+# Command to start the service
+ExecStart=/usr/bin/node src/index.js
+
+# Restart policy
+Restart=always
+RestartSec=10
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=LOG_LEVEL=info
+EnvironmentFile=-/opt/whatsapp-bridge/.env
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/whatsapp-bridge/logs
+ReadWritePaths=/opt/whatsapp-bridge/.wwebjs_auth
+ReadWritePaths=/opt/whatsapp-bridge/temp
+
+# Logging
+StandardOutput=append:/opt/whatsapp-bridge/logs/service.log
+StandardError=append:/opt/whatsapp-bridge/logs/service-error.log
+SyslogIdentifier=whatsapp-bridge
+
+# Process limits
+LimitNOFILE=65536
+LimitNPROC=32768
+
+# Kill signal
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
